@@ -1,0 +1,86 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+  xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+  xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
+  <f:entry title="${it.name}" description="${it.description}" >
+  	<div name="parameter" description="${it.description}" >
+  	  
+      <!--
+      <input type="hidden" name="name" value="${it.name}"/>
+      <select name="value" multiple="true">
+        <j:forEach var="fsObj" items="${it.fsObjectsList}">
+            
+            <j:set var="fg_selected" value="false"/>
+            <j:forEach var="selected_name" items="${it.getDefaultList()}">
+                <j:if test="${selected_name eq fsObj}">
+                    <j:set var="fg_selected" value="true"/>
+                </j:if>
+            </j:forEach>       
+			<f:option selected="${fg_selected}" value="${fsObj}">${fsObj}</f:option>
+        </j:forEach>
+      </select>
+      -->
+      <input type="hidden" name="name" value="${it.name}"/>
+      <!--
+      <j:forEach var="fsObj" items="${it.fsObjectsList}">
+            
+            <j:set var="fg_selected" value="false"/>
+            <j:forEach var="selected_name" items="${it.getDefaultList()}">
+                <j:if test="${selected_name eq fsObj}">
+                    <j:set var="fg_selected" value="true"/>
+                </j:if>
+            </j:forEach>
+            <f:entry  >
+            <f:checkbox name="value" checked="${fg_selected}" title="${fsObj}"/> 
+            </f:entry>      
+        </j:forEach>
+       -->
+       
+       <j:set var="index" value="0"/>
+        <table id="tbl_ecp_${it.name}">
+          <j:forEach var="fsObj" items="${it.fsObjectsList}">
+              <tr id="ecp_${it.name}_${index}" style="white-space:nowrap">
+                <td>
+ 					<j:set var="fg_selected" value="false"/>
+		            <j:forEach var="selected_name" items="${it.getDefaultList()}">
+		                <j:if test="${selected_name eq fsObj}">
+		                    <j:set var="fg_selected" value="true"/>
+		                </j:if>
+		            </j:forEach>
+		            <f:entry  >
+		            <f:checkbox name="value" checked="${fg_selected}" title="${fsObj}" value="${fsObj}"/> 
+		            </f:entry>                
+                
+                 </td>
+            </tr>
+            <j:set var="index" value="${index + 1}"/>
+          </j:forEach>
+      </table>
+        
+    <!--
+      <f:entry title="${it.getDefaultString()}" >
+      </f:entry>
+    
+    -->   
+     </div>
+     
+     
+     
+    
+    <!--
+    <st:bind var="a" value="${it}"/>
+
+    <div id="msg" />
+    <script>
+      window.setInterval(function () {
+        a.increment(1, function(t) {
+          document.getElementById('msg').innerHTML = t.responseObject();
+        })
+      },1000);
+    </script>
+    --> 
+  </f:entry>
+  
+    
+  
+</j:jelly>
